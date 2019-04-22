@@ -1,8 +1,16 @@
 package ru.spsuace.projects.investment;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Math.abs;
+
 /**
  * Широбокова Полина
- *
+ * <p>
  * Нужно имулировать работу инвестиционного портфеля
  * 1) Есть рынок акций, акции могут менять свою цену
  * 2) Есть портфель на который можно вводить и выводить средства
@@ -15,4 +23,43 @@ package ru.spsuace.projects.investment;
  * 8) Так же он должен а процентом соотношении показывать сколько мы заработали/потеряли
  */
 public class Portfolio {
+        private int money;
+        private int totalGet;
+        private int totalLose;
+         Map<Integer, Share> totalTable = new HashMap<Integer, Share>();
+         private int stockCount;
+
+        public void earn(int money){
+            this.money=+money;
+            this.totalGet=+money;
+        }
+
+        public void waste(int money){
+            this.money=-money;
+            this.totalLose=-money;
+        }
+
+        public  void addStock(Share share){
+            totalTable.put(stockCount++, share);
+        }
+        public int totalMoney(){
+            int i=0;
+            Iterator iterator = totalTable.entrySet().iterator();
+            while (iterator.hasNext()){
+                money=+totalTable.get(i).price;
+                totalGet=+totalTable.get(i).price;
+                i++;
+            }
+            return money;
+        }
+        public double diffGetLose(){
+            return abs(totalGet-totalLose)/totalLose*100;
+        }
+
+
 }
+
+
+
+
+
