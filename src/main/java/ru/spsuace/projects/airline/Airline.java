@@ -1,7 +1,12 @@
 package ru.spsuace.projects.airline;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 /**
- * Бланков Никита
+ * Баланков Никита
  *
  * Создать систему, имитирующую авикомпанию.
  * 1) Авиакомпания имеет заданное количество направлений, и заданное количество самолетов
@@ -16,4 +21,20 @@ package ru.spsuace.projects.airline;
  * 6) Авиакомпания должна уметь считать потенциальную выручку по каждому рейсу на конец года
  */
 public class Airline {
+
+
+    public List getFlightByDate(int day, int month, int year) {
+        Calendar calendar = createCalendar(day, month, year);
+
+        return new ArrayList();//test
+    }
+
+    public Calendar createCalendar(int day, int month, int year) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        return calendar;
+    }
+
 }
