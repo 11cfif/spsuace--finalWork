@@ -18,4 +18,70 @@ package ru.spsuace.projects.logistic;
  * 9) Считаем, что количество машин изначално 0, но есть большой капитал
  */
 public class LogisticCompany {
+
+    public class Company {
+
+
+        public List<Machine> machineList;
+        public List<Flight> flightList;
+        public List<Direction> directionList;
+
+        float money; //деньги компании
+
+        public pay(Machine machine){ //купить
+            money -=machine.price; //вычитание
+            this.machineList.add(machine); //добавление машины
+        }
+        
+
+        public sell(Machine machine) {
+
+            if (machine.resource < 0) {
+                money += machine.price * 0.3;
+            } else
+                money += machine.price;
+            }
+
+        }
+
+
+
+    }
+
+    public class Machine { //машина
+        int resource; // ресурс машины в км
+        float price; //цена машины
+
+        public Machine(int resource, float price){
+            this.resource = resource;
+            this.price = price;
+        }
+    }
+
+
+
+    public class Flight { //рейса
+
+        private float salary; //стоимость рейса
+        private Direction direction; //путь
+
+
+        public Flight(float salary, Direction direction) {
+            this.salary = salary;
+            this.direction = direction;
+        }
+    }
+
+
+    public class Direction { //путь
+        private String goFrom;
+        private String goTo;
+
+        public Direction(String goFrom, String goTo) {
+            this.goFrom = goFrom;
+            this.goTo = goTo;
+        }
+    }
+
 }
+
