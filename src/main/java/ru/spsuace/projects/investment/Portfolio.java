@@ -64,7 +64,8 @@ public class Portfolio implements Observer {
 
     @Override
     public void update(Observable Share, Object arg) {
-        addStock(arg);
+            Share share=Share.class.cast(arg);
+        addStock(share);
     }
 }
 
