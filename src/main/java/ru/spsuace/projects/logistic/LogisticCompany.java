@@ -1,8 +1,12 @@
 package ru.spsuace.projects.logistic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Титов Роман
- *
+ * <p>
  * Создать систему, имитирующую логистическую компанию
  * 1) Компания имеет некоторое количество разных машин
  * 2) Каждая машина имеет свой ресурс (в киломметрах), по истечению ресурсов машина продается за 30% своей стоимости
@@ -21,61 +25,76 @@ public class LogisticCompany {
 
     public class Company {
 
+        //private
 
-        public List<Machine> machineList;
-        public List<Flight> flightList;
-        public List<Direction> directionList;
+        private final List<Machine> machineList = new ArrayList<Machine>();
+        private final List<Flight> flightList = new ArrayList<Flight>();
 
         float money; //деньги компании
 
-        public pay(Machine machine){ //купить
-            money -=machine.price; //вычитание
-            this.machineList.add(machine); //добавление машины
-        }
-        
-
-        public sell(Machine machine) {
-
-            if (machine.resource < 0) {
-                money += machine.price * 0.3;
-            } else
-                money += machine.price;
-            }
-
+        public void pay(Machine machine) { //купить
+            money -= machine.price; //вычитание
+            machineList.add(machine); //добавление машины
         }
 
+        public void sell(Machine machine) { //продать
+            money += machine.priceMachine();
+            machineList.remove(machine); //удаление из списка
+        }
 
+        //Сделайте методы добавления рейса
+        public void addFlight(Flight flight) {
+            flightList.add(flight);
+            this.money -= flight.salary;
+        }
 
+        //Добавления дня
+        public void addFlightDuration(Flight flight) {
+            flight.machine.resource -= flight.expenses;
+            this.money += flight.payment;
+        }
     }
 
     public class Machine { //машина
-        int resource; // ресурс машины в км
-        float price; //цена машины
+        private int resource; // ресурс машины
+        private final float price; //цена машины
 
-        public Machine(int resource, float price){
+        public Machine(int resource, float price) {
             this.resource = resource;
             this.price = price;
         }
-    }
 
-
-
-    public class Flight { //рейса
-
-        private float salary; //стоимость рейса
-        private Direction direction; //путь
-
-
-        public Flight(float salary, Direction direction) {
-            this.salary = salary;
-            this.direction = direction;
+        public float priceMachine() { //Цена машины
+            if (this.resource <= 0) {
+                return (float) (this.price * 0.3);
+            } else {
+                return this.price;
+            }
         }
     }
 
 
+    public class Flight { //рейс
+
+        private final float salary; //стоимость рейса
+        private final float payment; //оплата рейса
+        private final Direction direction; //путь
+        private final int flightDuration = 1; // продолжительность рейса
+        private final int expenses; // затраты ресурсов
+        private Machine machine;
+
+        public Flight(float salary, float payment, Direction direction, int expenses, Machine machine) {
+            this.salary = salary;
+            this.payment = payment;
+            this.direction = direction;
+            this.expenses = expenses;
+            this.machine = machine;
+        }
+    }
+
     public class Direction { //путь
-        private String goFrom;
-        private String goTo;
+        private final String goFrom;
+        private final String goTo;
 
         public Direction(String goFrom, String goTo) {
             this.goFrom = goFrom;
