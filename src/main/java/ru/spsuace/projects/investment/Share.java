@@ -1,10 +1,12 @@
 package ru.spsuace.projects.investment;
 
 import java.util.Date;
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
-public class Share {
+public class Share extends Observable {
     public int price;
+    public int minPrice;
 
     public void set(int price) {
         this.price = price;
@@ -27,5 +29,12 @@ public class Share {
             result = result + percent * (difference % 30);
         }
         return result;
+    }
+
+    public void priceDecrease(int money){
+        price=-money;
+        if (price<=minPrice){
+            notifyObservers(this);
+        }
     }
 }
