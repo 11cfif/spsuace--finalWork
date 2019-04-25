@@ -2,7 +2,7 @@ package ru.spsuace.projects.petrol;
 
 /**
  * Субботина Елена
- * <p>
+ *
  * Создать систему, имитирующую бензокологку
  * 1) Заправка умеет заправлять машины, продавать некоторые товары + кофе с выпечкой (3 направления деятельности)
  * 2) Количество колонок на заправке ограничено
@@ -38,7 +38,7 @@ public class PetrolStation {
         int price = 0;
 
         if (date.after(calendarMax) && date.before(calendarMin)) {
-            // купить по способу с 23 до 6
+            // купить по способу с 23 до 6 - сначала заплати (заданное время для всех клиентов), потом заправь (время зависит от объема топлива)
         } else {
             price += fillCar(client, gasStation);
             gasStation.clientTime += client.getMinsForBuy();
