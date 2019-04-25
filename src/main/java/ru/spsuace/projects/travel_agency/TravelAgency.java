@@ -24,6 +24,7 @@ public class TravelAgency {
     int indClientsCounter;
     int corpClientsCounter;
 
+
     double Procent;
     public TravelAgency(double procent){
         this.Procent = procent;
