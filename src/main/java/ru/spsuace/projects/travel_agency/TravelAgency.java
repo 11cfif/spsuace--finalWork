@@ -1,5 +1,7 @@
 package ru.spsuace.projects.travel_agency;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,12 +23,18 @@ import java.util.Map;
 public class TravelAgency {
     Map<Integer, IndClients> allIndClients = new HashMap<Integer, IndClients>();
     Map<Integer, CorpClients> allCorpClients = new HashMap<Integer, CorpClients>();
+    Map<Integer, ArrayList<Camping>> Campings = new HashMap<Integer, ArrayList<Camping>>();
     int indClientsCounter;
     int corpClientsCounter;
+    int CampCounter;
 
+    public String Camp(Camping camp) {
+        Campings.add(CampCounter++, camp);
+    }
 
     double Procent;
-    public TravelAgency(double procent){
+
+    public TravelAgency(double procent) {
         this.Procent = procent;
     }
 
