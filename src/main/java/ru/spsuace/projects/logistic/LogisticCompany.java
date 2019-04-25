@@ -49,9 +49,12 @@ public class LogisticCompany {
         }
 
         //Добавления дня
-        public void addFlightDuration(Flight flight) {
-            flight.machine.resource -= flight.expenses;
-            this.money += flight.payment;
+        public void addFlightDuration() {
+            for (int i = 0; i < flightList.size(); i++) {
+                Flight flight = flightList.get(i);
+                flight.machine.resource -= flight.expenses;
+                this.money += flight.payment;
+            }
         }
     }
 
