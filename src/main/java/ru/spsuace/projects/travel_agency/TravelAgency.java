@@ -24,6 +24,11 @@ public class TravelAgency {
     int indClientsCounter;
     int corpClientsCounter;
 
+    double Procent;
+    public TravelAgency(double procent){
+        this.Procent = procent;
+    }
+
     public String buySingleTravel(IndClients client) {
         Camping camp = new Camping();
         int townCheck = 0;
@@ -32,14 +37,13 @@ public class TravelAgency {
                 townCheck = 1;
             }
         }
-        if (client.Budget >= camp.Price && (camp.DateOut - camp.DateIn) == client.Days && townCheck == 1) {
+        if (client.Budget >= (camp.Price + this.Procent) && (camp.DateOut - camp.DateIn) == client.Days && townCheck == 1) {
             allIndClients.put(indClientsCounter++, client);
         } else {
             return null;
         }
         return "ok";
     }
-
 
 
     public String buyGroupTravel(CorpClients client) {

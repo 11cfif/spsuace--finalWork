@@ -18,7 +18,7 @@ public class Camping {
     protected int DateIn;
     protected int DateOut;
     protected double Price;
-    private int Packages;
+    protected int Packages;
 
     public void Tour(String city, int datain, int dataout, double price, int packages) {
         this.City = city;
