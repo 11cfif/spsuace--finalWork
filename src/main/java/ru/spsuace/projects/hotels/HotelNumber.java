@@ -7,7 +7,7 @@ public class HotelNumber {
     private Date orderTill;
     private boolean breakfast;
     private int breakfastPrice;
-    private int Price;
+    private int price;
 
     public HotelNumber(int places, int breakfastPrice, boolean breakfast) {
         this.places = places;
@@ -25,7 +25,7 @@ public class HotelNumber {
     }
 
     public int getPrice() {
-        return Price;
+        return price;
     }
 
     public Date getOrderTill() {
@@ -40,7 +40,8 @@ public class HotelNumber {
         isFree = false;
         this.places -= places;
         this.orderTill = orderTill;
-        return  this.Price = countPrice(this.places, this.breakfast);
+        this.price = countPrice(this.places, this.breakfast);
+        return  this.price;
     }
 
     private int countPrice(int placeAmount, boolean breakfast) {

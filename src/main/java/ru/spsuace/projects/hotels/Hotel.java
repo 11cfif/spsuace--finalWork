@@ -17,7 +17,7 @@ public class Hotel {
     private int size;
     private double money;
     private List<HotelNumber> list;
-    private List<HotelNumber> bookedNumbers;
+    private List<HotelNumber> bookedNumbers = new ArrayList<>();
     private int revenue;
 
     public Hotel(int size, double money, List<HotelNumber> list) {
@@ -29,19 +29,19 @@ public class Hotel {
     public List<HotelNumber> showFreeNumbers(int places, Date date, boolean breakfast) {
         List<HotelNumber> temp = new ArrayList<>();
 
-        for (int i = 0; i < this.list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
 
-            if (this.list.get(i).getPlaces() >= places
-                    && this.list.get(i).getOrderTill().before(date)
-                    && this.list.get(i).getBreakfast() == breakfast) {
+            if (list.get(i).getPlaces() >= places
+                    && list.get(i).getOrderTill().before(date)
+                    && list.get(i).getBreakfast() == breakfast) {
 
-                temp.add(this.list.get(i));
+                temp.add(list.get(i));
             }
         }
         return temp;
     }
 
-    public void OrderNumber(int places, Date date, boolean breafast) {
+    public void orderNumber(int places, Date date, boolean breafast) {
         List<HotelNumber> freeNumber = showFreeNumbers(places, date, breafast);
 
         int choosenNumber = 2; // может быть другое, в зависимости от выбора пользователя
