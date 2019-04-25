@@ -1,6 +1,6 @@
 package ru.spsuace.projects.travel_agency;
 
-import java.util.Date;
+
 /**
  * Создать систему, имулирующую работу туристического агенства.
  * 1) Есть клиенты, которые имеют заданный бюджет, максимальное количество дней отпуска и список желаемых городов
@@ -14,10 +14,18 @@ import java.util.Date;
  * 7) После покупки путевки, клиент отменяет заявки, которые уже не вписываются в бюджет, время отпуска или в его даты
  */
 public class Camping {
-    private String City;
-    public void Tour(Date data, double price, int packages){
+    protected String City;
+    protected int DateIn;
+    protected int DateOut;
+    protected double Price;
+    private int Packages;
 
-
+    public void Tour(String city, int datain, int dataout, double price, int packages) {
+        this.City = city;
+        this.DateIn = datain;
+        this.DateOut = dataout;
+        this.Price = price;
+        this.Packages = packages;
     }
 
 }

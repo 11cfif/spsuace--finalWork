@@ -1,6 +1,6 @@
 package ru.spsuace.projects.travel_agency;
 
-import java.util.List;
+
 
 /**
  * Создать систему, имулирующую работу туристического агенства.
@@ -23,7 +23,7 @@ class IndClients extends Clients {
     protected int Days;
     protected String[] Towns;
 
-    IndClients(double budget, int days, String[] towns){
+    public IndClients(double budget, int days, String[] towns){
         this.Budget = budget;
         this.Days = days;
         this.Towns = towns;
@@ -33,7 +33,7 @@ class IndClients extends Clients {
 class CorpClients extends Clients {
     protected int People;
     protected String Town;
-    CorpClients(int people, String town){
+    public CorpClients(int people, String town){
         this.People = people;
         this.Town = town;
     }
