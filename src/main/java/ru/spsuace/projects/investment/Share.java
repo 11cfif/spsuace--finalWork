@@ -20,7 +20,7 @@ public class Share extends Observable {
 
         double result = 0;
         Date today = new Date();
-        TimeUnit timeUnit=TimeUnit.DAYS;
+        TimeUnit timeUnit = TimeUnit.DAYS;
 
         long difference = today.getTime() - data.getTime();
         timeUnit.convert(difference, TimeUnit.DAYS);
@@ -31,9 +31,9 @@ public class Share extends Observable {
         return result;
     }
 
-    public void priceDecrease(int money){
-        price=-money;
-        if (price<=minPrice){
+    public void priceDecrease(int money) {
+        price = -money;
+        if (price <= minPrice) {
             notifyObservers(this);
         }
     }
