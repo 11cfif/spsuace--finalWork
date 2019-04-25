@@ -1,5 +1,7 @@
 package ru.spsuace.projects.travel_agency;
 
+import java.util.List;
+
 /**
  * Создать систему, имулирующую работу туристического агенства.
  * 1) Есть клиенты, которые имеют заданный бюджет, максимальное количество дней отпуска и список желаемых городов
@@ -12,7 +14,27 @@ package ru.spsuace.projects.travel_agency;
  * Процент меняется при покупек путевок оптом (от заданного количества человек)
  * 7) После покупки путевки, клиент отменяет заявки, которые уже не вписываются в бюджет, время отпуска или в его даты
  */
-public class TravelAgency {
+public class Clients {
 
+}
 
+class IndClients extends Clients {
+    protected double Budget;
+    protected int Days;
+    protected String[] Towns;
+
+    IndClients(double budget, int days, String[] towns){
+        this.Budget = budget;
+        this.Days = days;
+        this.Towns = towns;
+    }
+}
+
+class CorpClients extends Clients {
+    protected int People;
+    protected String Town;
+    CorpClients(int people, String town){
+        this.People = people;
+        this.Town = town;
+    }
 }
