@@ -12,10 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Singleton {
 
     private static volatile Singleton instance;
+
     private final int id;
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    public Singleton(int id) {
+    private Singleton(int id) {
         this.id = id;
     }
 

@@ -1,6 +1,8 @@
 package ru.spsuace.projects.pass_fail.map;
 
 
+import java.util.concurrent.atomic.AtomicReference;
+
 /**
  * Реализовать контейнер для мапы. Сам класс ClosableMap считается потокобезопасным и с ним проблем нет. Его НЕ трогать.
  * Суть в том, что после вызова метода map.close() любой другой метод map будет кидать ошибкуи крашить данные.
@@ -13,6 +15,8 @@ package ru.spsuace.projects.pass_fail.map;
  * Все методы могут вызываться из разных потоков
  */
 public class ContainerMap {
+
+    public static AtomicReference<ContainerMap> instanceMap = new AtomicReference<>();
 
     private ClosableMap map = new ClosableMap();
 
