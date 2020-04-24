@@ -13,13 +13,13 @@ public class Singleton {
 
     private static volatile Singleton INSTANCE;
     private final int id;
-    private static final AtomicInteger counter = new AtomicInteger(0);
+    private  static final AtomicInteger counter = new AtomicInteger(0);
 
     private Singleton(int id) {
        this.id = id;
     }
 
-    private int getId() {
+    public int getId() {
         return id;
     }
     public static Singleton getInstance() {
