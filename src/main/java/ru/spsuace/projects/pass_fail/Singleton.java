@@ -30,7 +30,7 @@ public class Singleton {
             synchronized (Singleton.class) {
                 currentInstance = instance;
                 if (currentInstance == null) {
-                    instance = currentInstance = new Singleton(1);
+                    instance = currentInstance = new Singleton(counter.incrementAndGet());
                 }
             }
         }
