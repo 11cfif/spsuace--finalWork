@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Все методы могут вызываться из разных потоков
  */
 public class ContainerMap {
-    private static volatile boolean closeCheck = false;
+    private volatile Boolean closeCheck = false;
     private ClosableMap map = new ClosableMap();
 
     /**
@@ -23,7 +23,7 @@ public class ContainerMap {
      */
     public Long put(Long key, Long value) {
         if (!closeCheck) {
-            synchronized (ContainerMap.class) {
+            synchronized (closeCheck) {
                 if (!closeCheck) {
                     return map.put(key, value);
                 }
@@ -37,8 +37,8 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        if (!closeCheck) {
-            synchronized (ContainerMap.class) {
+        if (!this.closeCheck) {
+            synchronized (closeCheck) {
                 if (!closeCheck) {
                     return map.get(key);
                 }
@@ -51,9 +51,9 @@ public class ContainerMap {
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        if (!closeCheck) {
-            synchronized (ContainerMap.class) {
-                if (!closeCheck) {
+        if (!this.closeCheck) {
+            synchronized (closeCheck) {
+                if (!this.closeCheck) {
                     closeCheck = true;
                     map.close();
                 }
