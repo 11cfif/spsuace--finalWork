@@ -23,9 +23,7 @@ public class ContainerMap {
      */
     public Long put(Long key, Long value) {
         if (!closeCheck.get()) {
-            synchronized (closeCheck) {
-                if (!closeCheck.get()) return map.put(key, value);
-            }
+            return map.put(key, value);
         }
         return null;
     }
@@ -36,9 +34,7 @@ public class ContainerMap {
      */
     public Long get(Long key) {
         if (!closeCheck.get()) {
-            synchronized (closeCheck) {
-                if (!closeCheck.get()) return map.get(key);
-            }
+            return map.get(key);
         }
         return null;
     }
