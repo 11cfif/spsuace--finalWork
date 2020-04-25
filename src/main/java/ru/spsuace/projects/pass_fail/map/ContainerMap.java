@@ -28,7 +28,9 @@ public class ContainerMap {
         if (closeOn.get()) {
             return null;
         } else {
-            return map.put(key, value);
+            synchronized (closeOn) {
+                return map.put(key, value);
+            }
         }
     }
 
@@ -40,7 +42,9 @@ public class ContainerMap {
         if (closeOn.get()) {
             return null;
         } else {
-            return map.get(key);
+            synchronized (closeOn) {
+                return map.get(key);
+            }
         }
     }
 
@@ -48,7 +52,9 @@ public class ContainerMap {
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        closeOn.compareAndSet(false, true);
-        map.close();
+        synchronized (closeOn) {
+            closeOn.compareAndSet(false, true);
+            map.close();
+        }
     }
 }
