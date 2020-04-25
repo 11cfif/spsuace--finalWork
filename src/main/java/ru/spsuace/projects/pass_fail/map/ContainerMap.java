@@ -1,7 +1,6 @@
 package ru.spsuace.projects.pass_fail.map;
 
 
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -16,7 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Все методы могут вызываться из разных потоков
  */
 public class ContainerMap {
-    Semaphore semaphore = new Semaphore(1);
     private final AtomicBoolean closeCheck = new AtomicBoolean(false);
     private ClosableMap map = new ClosableMap();
 
