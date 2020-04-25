@@ -16,45 +16,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class ContainerMap {
 
-    private Boolean closeOn = false;
-
     private ClosableMap map = new ClosableMap();
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
-    public Long put(Long key, Long value) {
-        synchronized (this) {
-            if (closeOn) {
-                return null;
-            } else {
-                return map.put(key, value);
-            }
-        }
-    }
-
+    public Long put(Long key, Long value) {return map.put(key, value);}
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
-    public Long get(Long key) {
-        synchronized (this) {
-            if (closeOn) {
-                return null;
-            } else {
-                return map.get(key);
-
-            }
-        }
-    }
+    public Long get(Long key) {return map.get(key);}
 
     /**
      * Считаем, что метод вызывается только один раз
      */
-    public void close() {
-        synchronized (this) {
-            closeOn = true;
-            map.close();
-        }
-    }
+    public void close() {map.close();}
 }

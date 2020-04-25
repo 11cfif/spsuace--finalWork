@@ -11,27 +11,5 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Singleton {
 
-    private static volatile Singleton instance;
 
-    private final int id;
-    private static final AtomicInteger counter = new AtomicInteger(0);
-
-    private Singleton(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (instance) {
-                if (instance == null) {
-                    instance = new Singleton(counter.getAndIncrement());
-                }
-            }
-        }
-        return instance;
-    }
 }
