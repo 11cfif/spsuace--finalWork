@@ -18,14 +18,13 @@ public class ContainerMap {
 
     private Boolean closeOn = false;
 
-
     private ClosableMap map = new ClosableMap();
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long put(Long key, Long value) {
-        synchronized (ContainerMap.class) {
+        synchronized (this) {
             if (closeOn) {
                 return null;
             } else {
@@ -39,7 +38,7 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        synchronized (ContainerMap.class) {
+        synchronized (this) {
             if (closeOn) {
                 return null;
             } else {
@@ -53,7 +52,7 @@ public class ContainerMap {
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        synchronized (ClosableMap.class) {
+        synchronized (this) {
             closeOn = true;
             map.close();
         }
