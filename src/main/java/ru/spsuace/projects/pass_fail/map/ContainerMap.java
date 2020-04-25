@@ -1,6 +1,8 @@
 package ru.spsuace.projects.pass_fail.map;
 
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * Реализовать контейнер для мапы. Сам класс ClosableMap считается потокобезопасным и с ним проблем нет. Его НЕ трогать.
  * Суть в том, что после вызова метода map.close() любой другой метод map будет кидать ошибкуи крашить данные.
@@ -14,13 +16,18 @@ package ru.spsuace.projects.pass_fail.map;
  */
 public class ContainerMap {
 
+    private Boolean closingCheck = false;
     private ClosableMap map = new ClosableMap();
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long put(Long key, Long value) {
-        return map.put(key, value);
+        if (!closingCheck) {
+            return map.put(key, value);
+        } else {
+            return null;
+        }
     }
 
 
@@ -28,13 +35,18 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        return map.get(key);
+        if (!closingCheck) {
+            return map.get(key);
+        } else {
+            return null;
+        }
     }
 
     /**
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
+        closingCheck = true;
         map.close();
     }
 }
