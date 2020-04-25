@@ -24,7 +24,7 @@ public class ContainerMap {
      */
     public Long put(Long key, Long value) {
         synchronized (ContainerMap.class) {
-            if (closeCheck.get() == false) {
+            if (!closeCheck.get()) {
                 return map.put(key, value);
             }
         }
@@ -37,7 +37,7 @@ public class ContainerMap {
      */
     public Long get(Long key) {
         synchronized (ContainerMap.class) {
-            if (closeCheck.get() == false) {
+            if (!closeCheck.get()) {
                 return map.get(key);
             }
         }
@@ -48,7 +48,9 @@ public class ContainerMap {
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        map.close();
-        closeCheck.compareAndSet(false, true);
+        synchronized (ContainerMap.class) {
+            closeCheck.compareAndSet(false, true);
+            map.close();
+        }
     }
 }
