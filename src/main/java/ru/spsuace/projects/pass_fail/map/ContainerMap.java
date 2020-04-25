@@ -25,10 +25,10 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long put(Long key, Long value) {
-        if (closeOn.get()) {
-            return null;
-        } else {
-            synchronized (closeOn) {
+        synchronized (closeOn) {
+            if (closeOn.get()) {
+                return null;
+            } else {
                 return map.put(key, value);
             }
         }
@@ -39,11 +39,12 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        if (closeOn.get()) {
-            return null;
-        } else {
-            synchronized (closeOn) {
+        synchronized (closeOn) {
+            if (closeOn.get()) {
+                return null;
+            } else {
                 return map.get(key);
+
             }
         }
     }
