@@ -15,14 +15,14 @@ package ru.spsuace.projects.pass_fail.map;
 public class ContainerMap {
 
     private ClosableMap map = new ClosableMap();
-    private Boolean Switch = false;
+    private boolean switchClose = false;
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long put(Long key, Long value) {
         synchronized (this) {
-            if (!Switch) {
+            if (!switchClose) {
                 return map.put(key, value);
             } else {
                 return null;
@@ -35,7 +35,7 @@ public class ContainerMap {
      */
     public Long get(Long key) {
         synchronized (this) {
-            if (!Switch) {
+            if (!switchClose) {
                 return map.get(key);
             } else {
                 return null;
@@ -48,7 +48,7 @@ public class ContainerMap {
      */
     public void close() {
         synchronized (this) {
-            Switch = true;
+            switchClose = true;
             map.close();
         }
     }
