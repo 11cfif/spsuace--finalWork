@@ -37,7 +37,7 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        if (!this.closeCheck) {
+        if (!closeCheck) {
             synchronized (closeCheck) {
                 if (!closeCheck) {
                     return map.get(key);
@@ -51,9 +51,9 @@ public class ContainerMap {
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        if (!this.closeCheck) {
+        if (!closeCheck) {
             synchronized (closeCheck) {
-                if (!this.closeCheck) {
+                if (!closeCheck) {
                     closeCheck = true;
                     map.close();
                 }
