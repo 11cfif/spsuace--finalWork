@@ -38,7 +38,7 @@ public class ContainerMap {
      */
     public Long get(Long key) {
         synchronized (this){
-            if(checking){
+            if(!checking){
                 return map.get(key);
             }else{
                 return null;
