@@ -16,11 +16,20 @@ public class ContainerMap {
 
     private ClosableMap map = new ClosableMap();
 
+
+    private boolean checking = false;
+
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long put(Long key, Long value) {
-        return map.put(key, value);
+        synchronized (this){
+            if (!checking) {
+                return map.put(key, value);
+            }else {
+                return null;
+            }
+        }
     }
 
 
@@ -28,13 +37,22 @@ public class ContainerMap {
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
      */
     public Long get(Long key) {
-        return map.get(key);
+        synchronized (this){
+            if(checking){
+                return map.get(key);
+            }else{
+                return null;
+            }
+        }
     }
 
     /**
      * Считаем, что метод вызывается только один раз
      */
     public void close() {
-        map.close();
+        synchronized(this){
+            checking = true;
+            map.close();
+        }
     }
 }
