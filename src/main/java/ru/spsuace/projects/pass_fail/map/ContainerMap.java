@@ -24,7 +24,7 @@ public class ContainerMap {
      */
     public Long put(Long key, Long value) {
         synchronized (this){
-            if (!checking) {
+            if (checking) {
                 return map.put(key, value);
             }else {
                 return null;
@@ -38,7 +38,7 @@ public class ContainerMap {
      */
     public Long get(Long key) {
         synchronized (this){
-            if(!checking){
+            if(checking){
                 return map.get(key);
             }else{
                 return null;
