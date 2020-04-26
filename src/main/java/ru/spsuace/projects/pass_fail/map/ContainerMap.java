@@ -17,7 +17,7 @@ public class ContainerMap {
     private ClosableMap map = new ClosableMap();
 
 
-    private boolean checking = false;
+    private boolean checking = true;
 
     /**
      * Нельзя, чтобы вызывались методы map после вызова map.close(). В этом случае можно вернуть null
@@ -51,7 +51,7 @@ public class ContainerMap {
      */
     public void close() {
         synchronized(this){
-            checking = true;
+            checking = false;
             map.close();
         }
     }
